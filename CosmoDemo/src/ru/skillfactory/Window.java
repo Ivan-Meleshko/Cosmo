@@ -13,7 +13,6 @@ public class Window extends JFrame {
 	setResizable(false);
 	setDefaultCloseOperation(3);
 	
-	
 	// "Find out the Day tribe and the Ascension tribe of the number. Enter the number.";
 	
 	setVisible(true);
