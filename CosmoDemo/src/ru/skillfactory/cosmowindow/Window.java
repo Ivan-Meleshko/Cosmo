@@ -1,4 +1,4 @@
-package ru.skillfactory;
+package ru.skillfactory.cosmowindow;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
