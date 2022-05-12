@@ -17,7 +17,7 @@ public class MyFrame extends JFrame {
 	
 	JPanel panel = new JPanel();
 	JPanel panel2 = new JPanel();
-	JButton button1 = new JButton("Check number!");
+	JButton button1 = new JButton("Let's do this!");
 	JButton button2 = new JButton("Exit");
 	
 	
@@ -58,11 +58,11 @@ public class MyFrame extends JFrame {
 		panel2.setBorder(border);
 		
 		JLabel label1 = new JLabel();
-		label1.setText("Greeting. Enter the text.");
+		label1.setText("Find out the number tribe. Enter the number.");
 		label1.setBackground(Color.pink);
 		label1.setOpaque(true);
 		label1.setForeground(Color.black);
-		label1.setFont(new Font("Monospaced", Font.ITALIC, 32));
+		label1.setFont(new Font("Monospaced", Font.ITALIC, 18));
 		label1.setBounds(0,0, 190,190);
 		
 		JLabel label3 = new JLabel();
