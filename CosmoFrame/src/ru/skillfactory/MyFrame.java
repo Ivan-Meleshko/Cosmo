@@ -19,6 +19,7 @@ public class MyFrame extends JFrame {
 	JPanel panel2 = new JPanel();
 	JButton button1 = new JButton("Let's do this!");
 	JButton button2 = new JButton("Exit");
+	JTextField textField;
 	
 	
 	public MyFrame() {
@@ -45,6 +46,14 @@ public class MyFrame extends JFrame {
 		button2.setBackground(Color.green);
 		button2.setBorder(border2);
 		button2.setPreferredSize(new Dimension( 150, 90));
+		
+		textField = new JTextField();
+		textField.setPreferredSize(new Dimension(350, 60));
+		textField.setFont(new Font("Consolas", Font.BOLD, 21));
+		textField.setForeground(Color.black); // text color
+		textField.setBackground(new Color(0x00ff00)); // background color
+		textField.setCaretColor(Color.red); // caret color
+		
 		
 		panel.setPreferredSize(new Dimension(400,400));
 		panel.setBackground(Color.darkGray);
@@ -83,7 +92,7 @@ public class MyFrame extends JFrame {
 		label2.setBounds(0, 300, 190,190);
 		
 		panel.add(label1);
-		panel.add(label3);
+		panel.add(textField);
 		panel.add(label2);
 		
 		panel2.add(button1);
