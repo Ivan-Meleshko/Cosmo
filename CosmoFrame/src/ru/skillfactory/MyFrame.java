@@ -1,38 +1,60 @@
 package ru.skillfactory;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.AttributeSet.ColorAttribute;
 
 
 public class MyFrame extends JFrame {
 	
 	JPanel panel = new JPanel();
 	JPanel panel2 = new JPanel();
+	JButton button1 = new JButton("Check number!");
+	JButton button2 = new JButton("Exit");
+	
 	
 	public MyFrame() {
 		
-		setSize(788, 437);
+		setSize(699, 437);
 		setTitle("Planetary Calculator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new BorderLayout());
 		
 		Border border = BorderFactory.createLineBorder(Color.orange, 3);
+		Border border2 = BorderFactory.createRaisedBevelBorder();
+		
+		button1.setFocusable(false);
+		button1.setFont(new Font("Monospaced", Font.ITALIC, 22));
+		button1.setForeground(Color.red);
+		button1.setBackground(Color.green);
+		button1.setBorder(border2);
+		button1.setPreferredSize(new Dimension( 150, 90));
+		
+		button2.setFocusable(false);
+		button2.setFont(new Font("Monospaced", Font.ITALIC, 22));
+		button2.setForeground(Color.red);
+		button2.setBackground(Color.green);
+		button2.setBorder(border2);
+		button2.setPreferredSize(new Dimension( 150, 90));
 		
 		panel.setPreferredSize(new Dimension(400,400));
 		panel.setBackground(Color.darkGray);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
 		panel.setBorder(border);
 		
-		panel2.setPreferredSize(new Dimension(120,120));
+		panel2.setPreferredSize(new Dimension(123,123));
 		panel2.setBackground(Color.yellow);
-		panel2.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		//panel2.setLayout(new FlowLayout(FlowLayout.LEADING, 7, 11));
+		panel2.setLayout(new GridLayout(2,1,7,11));
 		panel2.setBorder(border);
 		
 		JLabel label1 = new JLabel();
@@ -63,6 +85,9 @@ public class MyFrame extends JFrame {
 		panel.add(label1);
 		panel.add(label3);
 		panel.add(label2);
+		
+		panel2.add(button1);
+		panel2.add(button2);
 		
 		add(panel, BorderLayout.CENTER);
 		add(panel2, BorderLayout.SOUTH);
