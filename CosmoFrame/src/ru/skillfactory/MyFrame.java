@@ -7,11 +7,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.AttributeSet.ColorAttribute;
-
+import java.text.Format;
+import java.text.NumberFormat;
 
 public class MyFrame extends JFrame {
 	
@@ -19,7 +24,13 @@ public class MyFrame extends JFrame {
 	JPanel panel2 = new JPanel();
 	JButton button1 = new JButton("Let's do this!");
 	JButton button2 = new JButton("Exit");
-	JTextField textField;
+	//JFormattedTextField numField;
+	
+	JTextField numField;
+	String content;
+	Integer c;
+	
+	//Format numberFormat;
 	
 	
 	public MyFrame() {
@@ -40,6 +51,30 @@ public class MyFrame extends JFrame {
 		button1.setBorder(border2);
 		button1.setPreferredSize(new Dimension( 150, 90));
 		
+		button1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				content = (numField.getText());
+				System.out.println("Button clicked. Examined content currently is '" + content + "'.");
+				
+			}	
+			
+		});
+		
+		
+		button2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Terminated.");
+				System.exit(0);
+				
+			}
+			
+		});
+		
+		
 		button2.setFocusable(false);
 		button2.setFont(new Font("Monospaced", Font.ITALIC, 22));
 		button2.setForeground(Color.red);
@@ -47,12 +82,26 @@ public class MyFrame extends JFrame {
 		button2.setBorder(border2);
 		button2.setPreferredSize(new Dimension( 150, 90));
 		
-		textField = new JTextField();
-		textField.setPreferredSize(new Dimension(350, 60));
-		textField.setFont(new Font("Consolas", Font.BOLD, 21));
-		textField.setForeground(Color.black); // text color
-		textField.setBackground(new Color(0x00ff00)); // background color
-		textField.setCaretColor(Color.red); // caret color
+		
+		numField = new JTextField();
+//		numField.addPropertyChangeListener("value", new PropertyChangeListener() {
+//
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//				examinedNum = ((Number)numField.getValue()).intValue();
+//				System.out.println("Property changed: the examined number is " + examinedNum);
+//			}
+//			
+//		});
+//		
+//		numberFormat = NumberFormat.getInstance();
+
+		numField.setPreferredSize(new Dimension(350, 60));
+		numField.setFont(new Font("Consolas", Font.BOLD, 21));
+		numField.setForeground(Color.black); // text color
+		numField.setBackground(new Color(0x00ff00)); // background color
+		numField.setCaretColor(Color.red); // caret color
+		
 		
 		
 		panel.setPreferredSize(new Dimension(400,400));
@@ -67,7 +116,7 @@ public class MyFrame extends JFrame {
 		panel2.setBorder(border);
 		
 		JLabel label1 = new JLabel();
-		label1.setText("Find out the number tribe. Enter the number.");
+		label1.setText("Hello, sir.");
 		label1.setBackground(Color.pink);
 		label1.setOpaque(true);
 		label1.setForeground(Color.black);
@@ -84,7 +133,7 @@ public class MyFrame extends JFrame {
 
 		
 		JLabel label2 = new JLabel();
-		label2.setText("Result will be here");
+		label2.setText("The weather is good today!");
 		label2.setBackground(Color.yellow);
 		label2.setOpaque(true);
 		label2.setForeground(Color.black);
@@ -92,7 +141,7 @@ public class MyFrame extends JFrame {
 		label2.setBounds(0, 300, 190,190);
 		
 		panel.add(label1);
-		panel.add(textField);
+		panel.add(numField);
 		panel.add(label2);
 		
 		panel2.add(button1);
@@ -106,19 +155,6 @@ public class MyFrame extends JFrame {
 
 		//ImageIcon image = new ImageIcon("flower.png");
 		
-		
-		
-		
-		
-		
-//	JLabel Top = new JLabel("Find out the number tribe. Enter the number.");
-//	//Top.setText("Find out the number tribe. Enter the number.");
-//	JTextField jtf = new JTextField("           ");
-//	JPanel Panel = new JPanel();
-//	
-//	Panel.add(Top);
-//	Panel.add(jtf);
-//	add(Panel);
 	
 	}
 
