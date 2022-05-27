@@ -17,150 +17,149 @@ import javax.swing.border.Border;
 import javax.swing.text.AttributeSet.ColorAttribute;
 import java.text.Format;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MyFrame extends JFrame {
 	
-	JPanel panel = new JPanel();
-	JPanel panel2 = new JPanel();
-	JButton button1 = new JButton("Let's do this!");
-	JButton button2 = new JButton("Exit");
-	//JFormattedTextField numField;
-	
-	JTextField numField;
 	String content;
-	Integer c;
-	
-	//Format numberFormat;
-	
-	
+
 	public MyFrame() {
-		
-		setSize(699, 437);
+		setSize(1024, 578);
 		setTitle("Planetary Calculator");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new BorderLayout());
-		
-		Border border = BorderFactory.createLineBorder(Color.orange, 3);
-		Border border2 = BorderFactory.createRaisedBevelBorder();
-		
-		button1.setFocusable(false);
-		button1.setFont(new Font("Monospaced", Font.ITALIC, 22));
-		button1.setForeground(Color.red);
-		button1.setBackground(Color.green);
-		button1.setBorder(border2);
-		button1.setPreferredSize(new Dimension( 150, 90));
-		
-		button1.addActionListener(new ActionListener() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(400, 200));
+		panel.setBackground(Color.darkGray);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50));
+
+		JLabel label1 = new JLabel();
+		label1.setText("Find out the planetary number of the nubmer:");
+		label1.setBackground(Color.pink);
+		label1.setOpaque(true);
+		label1.setForeground(Color.black);
+		label1.setFont(new Font("Consolas", Font.PLAIN, 23));
+		label1.setBounds(0, 0, 100, 100);
+		panel.add(label1);
+
+		JTextField inputField = new JTextField(null);
+		inputField.setPreferredSize(new Dimension(350, 60));
+		inputField.setFont(new Font("Consolas", Font.BOLD, 21));
+		inputField.setForeground(Color.black); // text color
+		inputField.setBackground(Color.red); // background color
+		inputField.setCaretColor(Color.red); // caret color
+		panel.add(inputField);
+
+		add(panel, BorderLayout.CENTER);
+
+		JPanel panel2 = new JPanel();
+		panel2.setPreferredSize(new Dimension(400, 300));
+		panel2.setBackground(Color.darkGray);
+		panel2.setLayout(new FlowLayout(FlowLayout.CENTER, 78, 42));
+
+		JButton button = new JButton();
+		button.setFocusable(false);
+		button.setFont(new Font("Monospaced", Font.ITALIC, 22));
+		button.setForeground(Color.red);
+		button.setBackground(Color.green);
+		button.setPreferredSize(new Dimension(150, 90));
+		button.setText("GO!");
+
+		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				content = (numField.getText());
-				System.out.println("Button clicked. Examined content currently is '" + content + "'.");
-				
-			}	
-			
+				content = inputField.getText();
+				if (inputField.getText().length() < 1) {
+					JOptionPane.showMessageDialog(null, "Please, enter the number", "Correction needed",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else if (hasNumbers(content) == false) {
+					inputField.setText(null);
+					JOptionPane.showMessageDialog(null, "Please, enter some digits", "Correction needed",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					new ResultFrame(process(content));
+				}
+			}
+
 		});
-		
-		
+		panel2.add(button);
+
+		JButton button2 = new JButton();
 		button2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Terminated.");
 				System.exit(0);
-				
+
 			}
-			
+
 		});
-		
-		
 		button2.setFocusable(false);
 		button2.setFont(new Font("Monospaced", Font.ITALIC, 22));
 		button2.setForeground(Color.red);
 		button2.setBackground(Color.green);
-		button2.setBorder(border2);
-		button2.setPreferredSize(new Dimension( 150, 90));
-		
-		
-		numField = new JTextField();
-//		numField.addPropertyChangeListener("value", new PropertyChangeListener() {
-//
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt) {
-//				examinedNum = ((Number)numField.getValue()).intValue();
-//				System.out.println("Property changed: the examined number is " + examinedNum);
-//			}
-//			
-//		});
-//		
-//		numberFormat = NumberFormat.getInstance();
-
-		numField.setPreferredSize(new Dimension(350, 60));
-		numField.setFont(new Font("Consolas", Font.BOLD, 21));
-		numField.setForeground(Color.black); // text color
-		numField.setBackground(new Color(0x00ff00)); // background color
-		numField.setCaretColor(Color.red); // caret color
-		
-		
-		
-		panel.setPreferredSize(new Dimension(400,400));
-		panel.setBackground(Color.darkGray);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
-		panel.setBorder(border);
-		
-		panel2.setPreferredSize(new Dimension(123,123));
-		panel2.setBackground(Color.yellow);
-		//panel2.setLayout(new FlowLayout(FlowLayout.LEADING, 7, 11));
-		panel2.setLayout(new GridLayout(2,1,7,11));
-		panel2.setBorder(border);
-		
-		JLabel label1 = new JLabel();
-		label1.setText("Hello, sir.");
-		label1.setBackground(Color.pink);
-		label1.setOpaque(true);
-		label1.setForeground(Color.black);
-		label1.setFont(new Font("Monospaced", Font.ITALIC, 18));
-		label1.setBounds(0,0, 190,190);
-		
-		JLabel label3 = new JLabel();
-		label3.setText("*Input field will be here*");
-		label3.setBackground(Color.green);
-		label3.setOpaque(true);
-		label3.setForeground(Color.black);
-		label3.setFont(new Font("Monospaced", Font.ITALIC, 32));
-		label3.setBounds(0, 300, 190,190);
-
-		
-		JLabel label2 = new JLabel();
-		label2.setText("The weather is good today!");
-		label2.setBackground(Color.yellow);
-		label2.setOpaque(true);
-		label2.setForeground(Color.black);
-		label2.setFont(new Font("Monospaced", Font.ITALIC, 32));
-		label2.setBounds(0, 300, 190,190);
-		
-		panel.add(label1);
-		panel.add(numField);
-		panel.add(label2);
-		
-		panel2.add(button1);
+		button2.setPreferredSize(new Dimension(150, 90));
+		button2.setText("Exit");
 		panel2.add(button2);
-		
-		add(panel, BorderLayout.CENTER);
+
 		add(panel2, BorderLayout.SOUTH);
-		
-		
+
 		setVisible(true);
 
-		//ImageIcon image = new ImageIcon("flower.png");
-		
-	
 	}
 
+	public static boolean hasNumbers(String text) {
+		char[] chars = text.toCharArray();
+		boolean answer = false;
+		for (char a : chars) {
+			if (a == '0' || a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8'
+					|| a == '9') {
+				answer = true;
+			} else {
+				answer = false;
+			}
+		}
+		return answer;
+
+	}
 	
-	
-	
-	
+	public static int process(String text) {
+		char[] charArray = text.toCharArray();
+		char[] numArray = new char[charArray.length];
+		int counter = 0;
+		for (char a: charArray) {
+			if (a=='0' || a == '1' || a=='2' || a=='3' || a=='4' || a=='5' 
+					|| a == '6' || a =='7' || a=='8' || a=='9') {
+							numArray[counter] = a;
+							counter++;
+			} 
+		}
+		System.out.println(Arrays.toString(numArray));
+		char[] numArrayFin = new char[counter];
+		for (int i = 0; i < counter; i ++) {
+			numArrayFin[i] = numArray[i];
+		}
+		System.out.println(Arrays.toString(numArrayFin));
+		int number = Integer.parseInt(String.valueOf(numArrayFin));
+		return number;
+	}
 
 }
