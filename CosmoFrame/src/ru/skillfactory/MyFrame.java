@@ -35,7 +35,7 @@ import javax.swing.JTextField;
 
 public class MyFrame extends JFrame {
 
-	String content;
+	protected String content;
 	ResultFrame resultFrame;
 
 	public MyFrame() {

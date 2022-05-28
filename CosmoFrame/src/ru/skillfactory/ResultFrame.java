@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class ResultFrame extends JFrame {
 
 	MyFrame myFrame;
-	int i;
+	protected int i;
 	
 	public ResultFrame(int i)  {
 		this.i = i;
